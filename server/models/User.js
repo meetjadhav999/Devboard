@@ -9,6 +9,8 @@ const userSchema = new mongoose.Schema({
   githubUrl: { type: String },
   accessToken: { type: String },
   plan: { type: String, enum: ['free', 'pro'], default: 'free' },
+  leetcodeUsername: { type: String, default: '' },
+  codeforcesHandle: { type: String, default: '' },
   createdAt: { type: Date, default: Date.now }
 });
 

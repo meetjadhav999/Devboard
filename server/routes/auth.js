@@ -32,4 +32,19 @@ router.get('/logout', (req, res) => {
   res.json({ message: 'Logged out' });
 });
 
+router.put('/update-profile', require('../middleware/auth'), async (req, res) => {
+  try {
+    const User = require('../models/User');
+    const { leetcodeUsername, codeforcesHandle } = req.body;
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      { leetcodeUsername, codeforcesHandle },
+      { new: true }
+    ).select('-accessToken');
+    res.json({ user });
+  } catch (err) {
+    res.status(500).json({ message: 'Update failed' });
+  }
+});
+
 module.exports = router;
